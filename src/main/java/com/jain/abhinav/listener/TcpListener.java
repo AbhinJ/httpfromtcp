@@ -2,8 +2,8 @@ package com.jain.abhinav.listener;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.BlockingQueue;
-import com.jain.abhinav.ReadFile;
+import com.jain.abhinav.http.request.RequestParser;
+import com.jain.abhinav.http.request.pojo.Request;
 
 public class TcpListener {
     public static void tcpListener() {
@@ -11,12 +11,16 @@ public class TcpListener {
             while (true) {
                 Socket clientSocket = socket.accept();
                 System.out.println("Client connected: " + clientSocket.getInetAddress());
-                BlockingQueue<String> lines = ReadFile.getLinesFromProducer(clientSocket.getInputStream());
-                while (true) {
-                    String line = lines.take();
-                    if (line.equals(ReadFile.POISON_PILL)) break;
-                    System.out.println("read: " + line);
-                }
+
+                Request request = RequestParser.requestReader(clientSocket.getInputStream());
+                System.out.println(request);
+
+//                BlockingQueue<String> lines = ReadFile.getLinesFromProducer(clientSocket.getInputStream());
+//                while (true) {
+//                    String line = lines.take();
+//                    if (line.equals(ReadFile.POISON_PILL)) break;
+//                    System.out.println("read: " + line);
+//                }
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

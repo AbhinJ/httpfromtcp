@@ -1,8 +1,7 @@
-package com.jain.abhinav.http.request;
+package com.jain.abhinav.http;
 
 import com.jain.abhinav.http.exceptions.HttpParseException;
-import com.jain.abhinav.http.request.pojo.ParseState;
-import com.jain.abhinav.http.request.pojo.Request;
+
 import java.io.IOException;
 import java.io.InputStream;
 

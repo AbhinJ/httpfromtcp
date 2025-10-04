@@ -2,8 +2,8 @@ package com.jain.abhinav.listener;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-import com.jain.abhinav.http.request.RequestParser;
-import com.jain.abhinav.http.request.pojo.Request;
+import com.jain.abhinav.http.RequestParser;
+import com.jain.abhinav.http.Request;
 
 public class TcpListener {
     public static void tcpListener() {

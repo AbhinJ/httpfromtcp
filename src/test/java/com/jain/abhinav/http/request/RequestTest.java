@@ -1,7 +1,8 @@
 package com.jain.abhinav.http.request;
 
+import com.jain.abhinav.http.Request;
+import com.jain.abhinav.http.RequestParser;
 import com.jain.abhinav.http.exceptions.HttpParseException;
-import com.jain.abhinav.http.request.pojo.Request;
 import com.jain.abhinav.http.request.utils.ChunkInputStream;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;

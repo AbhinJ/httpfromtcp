@@ -1,6 +1,7 @@
-package com.jain.abhinav.http.request.pojo;
+package com.jain.abhinav.http;
 
 public enum ParseState {
     INITIALISED,
+    HEADERS,
     DONE
 }

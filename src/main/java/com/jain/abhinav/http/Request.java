@@ -54,7 +54,17 @@ public class Request {
 
     @Override
     public String toString () {
-        return requestLine.toString();
+        StringBuilder string = new StringBuilder();
+        string
+                .append("Request Line")
+                .append("\r\n")
+                .append(requestLine.toString())
+                .append("\r\n")
+                .append("Headers")
+                .append("\r\n")
+                .append(headers.toString());
+
+        return string.toString();
     }
 
     public Headers getHeaders() {

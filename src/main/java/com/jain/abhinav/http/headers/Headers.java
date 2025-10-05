@@ -72,4 +72,14 @@ public class Headers {
     public boolean isDoneParsing() {
         return isDoneParsing;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+        headers.forEach((key, value) -> {
+            string.append(key).append(": ").append(value).append("\r\n");
+        });
+
+        return string.toString();
+    }
 }

@@ -13,6 +13,10 @@ public class Request {
         return state;
     }
 
+    public RequestLine getRequestLine() {
+        return requestLine;
+    }
+
     public Request() {
         this.state = ParseState.INITIALISED;
         this.requestLine = new RequestLine();
@@ -38,7 +42,7 @@ public class Request {
                         break main_loop;
                     }
                     read += byteRead;
-                    this.state = ParseState.DONE;
+                    if(headers.isDoneParsing()) this.state = ParseState.DONE;
                 }
                 case DONE -> {
                     break main_loop;
@@ -51,5 +55,9 @@ public class Request {
     @Override
     public String toString () {
         return requestLine.toString();
+    }
+
+    public Headers getHeaders() {
+        return headers;
     }
 }

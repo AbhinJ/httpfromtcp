@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class Headers {
     private Map<String, String> headers = new HashMap<>();
+    private boolean isDoneParsing = false;
 
     public String getHeader(String key) {
         return headers.get(key.toLowerCase());
@@ -36,8 +37,8 @@ public class Headers {
             throw new HttpParseException("Header not properly formatted");
         }
         String name = parts[0].stripLeading();
-        if (name.matches(".*\\s+") && isValidField(name)) {
-            throw new HttpParseException("Header not properly formatted");
+        if (!isValidField(name)) {
+            throw new HttpParseException("field not properly formatted");
         }
         String value = parts[1].strip();
         setHeader(name, value);
@@ -54,10 +55,11 @@ public class Headers {
                 }
             }
             if (crlfIndex == -1) {
-                return -1;
+                break;
             }
             if (crlfIndex == read) {
                 read += 2;
+                isDoneParsing = true;
                 break;
             }
             String header = new String(buffer, read, crlfIndex - read, StandardCharsets.UTF_8);
@@ -65,5 +67,9 @@ public class Headers {
             read = crlfIndex + 2;
         }
         return read - offset;
+    }
+
+    public boolean isDoneParsing() {
+        return isDoneParsing;
     }
 }
